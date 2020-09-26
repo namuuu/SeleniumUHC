@@ -1,0 +1,13 @@
+name: SeleniumUHC
+version: 0.1
+main: fr.namu.uhc.MainUHC
+depend:
+  - Multiverse-Core
+load: POSTWORLD
+commands:
+  team:
+    aliases: t
+    description: Commandes de gestion des équipes
+  host:
+    aliases: h
+    description: Commandes pour les hosts de la partie
