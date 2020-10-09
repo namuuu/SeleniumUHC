@@ -21,6 +21,8 @@ public class InfoUHC {
     private UUID host = null;
 
     private int playerSize = 0;
+    private int teamLeft = 99;
+    private final int teamMax = 2;
 
     public static String prefix = "§9UHC §7» ";
 
@@ -82,11 +84,25 @@ public class InfoUHC {
     public void addPlayerSize() {
         this.playerSize++;
     }
+    public void decPlayerSize() {
+        this.playerSize--;
+    }
 
     public String getGWName() {
         return GWName;
     }
     public String getLWName() {
         return LWName;
+    }
+
+    public int getTeamLeft() {
+        return teamLeft;
+    }
+    public void setTeamLeft(int teamLeft) {
+        this.teamLeft = teamLeft;
+    }
+
+    public int getTeamMax() {
+        return teamMax;
     }
 }

@@ -3,15 +3,18 @@ package fr.namu.uhc.manager;
 import fr.namu.uhc.InfoUHC;
 import fr.namu.uhc.MainUHC;
 import fr.namu.uhc.PlayerUHC;
+import fr.namu.uhc.enums.State;
 import fr.namu.uhc.enums.StateUHC;
 import fr.namu.uhc.enums.TeamUHC;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class TeamManager {
@@ -63,6 +66,9 @@ public class TeamManager {
         if(puhc.getTeam() != null) {
             player.sendMessage(InfoUHC.prefix + "§cTu possèdes déjà une équipe !");
             return;
+        }
+        if(team.getPlayers().size() == this.main.info.getTeamMax()) {
+            player.sendMessage(InfoUHC.prefix + "§eCette équipe est pleine !");
         }
         Bukkit.getScoreboardManager().getMainScoreboard().getTeam("null").removeEntry(player.getName());
 
@@ -182,7 +188,6 @@ public class TeamManager {
         }
 
         TeamUHC team = puhc.getTeam();
-        System.out.println("disband");
 
         for(Player players : team.getPlayers()) {
             PlayerUHC puhcs = this.main.puhc.get(players.getUniqueId());
@@ -230,5 +235,26 @@ public class TeamManager {
         }
 
         player.sendMessage(InfoUHC.prefix + "§eTu viens de changer la couleur de ton équipe à " + color);
+    }
+
+    public TeamUHC recalculateTeamsLeft() {
+
+        List<TeamUHC> teamLeft = new ArrayList<>();
+
+        for(TeamUHC team : teams.values()) {
+            for(Player player : team.getPlayers()) {
+                PlayerUHC puhc = this.main.puhc.get(player.getUniqueId());
+                if(!teamLeft.contains(team) && puhc.getState().equals(State.ALIVE)) {
+                    teamLeft.add(team);
+                }
+            }
+        }
+
+        this.main.info.setTeamLeft(teamLeft.size());
+
+        if(teamLeft.size() == 1) {
+            return teamLeft.get(0);
+        }
+        return null;
     }
 }

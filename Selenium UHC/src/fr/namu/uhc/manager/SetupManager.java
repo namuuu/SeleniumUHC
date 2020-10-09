@@ -25,8 +25,10 @@ public class SetupManager {
 
     public void setup() {
         setWorlds();
-
+        setGamerules();
         setScoreboard();
+
+        this.main.points.setup();
     }
 
     private void setWorlds() {
@@ -41,6 +43,16 @@ public class SetupManager {
         info.setLobbyWorld(Bukkit.getWorld(info.getLWName()));
         info.setGameWorld(Bukkit.getWorld(info.getGWName()));
         info.setSpawnLoc(new Location(info.getLobbyWorld(), 8.5, 43, 33.5));
+    }
+
+    private void setGamerules() {
+        World world = this.main.info.getGameWorld();
+        world.setPVP(false);
+        world.setGameRuleValue("keepInventory", "true");
+        world.setGameRuleValue("naturalRegeneration", "false");
+        world.setGameRuleValue("announceAdvancements", "false");
+        world.setGameRuleValue("doDayLightCycle", "false");
+        world.setGameRuleValue("reducedDebugInfo", "true");
     }
 
     private void setScoreboard() {

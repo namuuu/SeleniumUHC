@@ -26,9 +26,11 @@ public class HostCMD implements TabExecutor {
 
         Player player = (Player)sender;
 
-        if(!player.isOp() && !this.main.info.getHost().equals(player) && !player.hasPermission("host.use")) {
-            player.sendMessage(InfoUHC.prefix + "§eVous n'avez pas les permissions nécessaires pour réaliser cette commande !");
-            return true;
+        if(!player.hasPermission("host.use")) {
+            if(!player.isOp()) {
+                player.sendMessage(InfoUHC.prefix + "§eVous n'avez pas les permissions nécessaires pour réaliser cette commande !");
+                return true;
+            }
         }
 
         if(args.length == 0) {
@@ -54,6 +56,11 @@ public class HostCMD implements TabExecutor {
                 this.main.info.setHost(null);
                 this.main.LobbyStuff.give(player);
                 this.main.score.updateBoard();
+                break;
+            case "startStuff":
+                this.main.GameStuff.save(player);
+                this.main.LobbyStuff.give(player);
+                player.teleport(this.main.info.getSpawnLoc());
                 break;
         }
 

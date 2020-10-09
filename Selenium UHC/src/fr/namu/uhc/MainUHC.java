@@ -2,19 +2,15 @@ package fr.namu.uhc;
 
 import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.onarandombox.MultiverseCore.api.MVWorldManager;
+import fr.namu.uhc.commands.CupCMD;
 import fr.namu.uhc.commands.HostCMD;
 import fr.namu.uhc.commands.TeamCMD;
-import fr.namu.uhc.listener.ClickEvent;
-import fr.namu.uhc.listener.DamageEvent;
-import fr.namu.uhc.listener.InteractEvent;
-import fr.namu.uhc.listener.JoinLeaveEvent;
-import fr.namu.uhc.manager.ColorManager;
-import fr.namu.uhc.manager.SetupManager;
-import fr.namu.uhc.manager.TeamManager;
-import fr.namu.uhc.manager.TimerManager;
+import fr.namu.uhc.listener.*;
+import fr.namu.uhc.manager.*;
 import fr.namu.uhc.menu.MenuManager;
 import fr.namu.uhc.scoreboard.FastBoard;
 import fr.namu.uhc.scoreboard.ScoreBoard;
+import fr.namu.uhc.stuff.GameStuff;
 import fr.namu.uhc.stuff.LobbyStuff;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -37,7 +33,12 @@ public class MainUHC extends JavaPlugin {
     public final JoinLeaveEvent join = new JoinLeaveEvent(this);
     public final TimerManager timer = new TimerManager(this);
     public final MenuManager menu = new MenuManager(this);
+    public final StartManager start = new StartManager(this);
+    public final WinManager win = new WinManager(this);
+    public final PointsManager points = new PointsManager(this);
+
     public final LobbyStuff LobbyStuff = new LobbyStuff(this);
+    public final GameStuff GameStuff = new GameStuff(this);
 
     public MVWorldManager mv = JavaPlugin.getPlugin(MultiverseCore.class).getMVWorldManager();
 
@@ -46,6 +47,7 @@ public class MainUHC extends JavaPlugin {
     public void onEnable() {
         setup.setup();
         join.resetPlayers();
+
 
         enableListeners();
         enableCommands();
@@ -57,11 +59,15 @@ public class MainUHC extends JavaPlugin {
         pm.registerEvents(new DamageEvent(this), this);
         pm.registerEvents(new InteractEvent(this), this);
         pm.registerEvents(new ClickEvent(this), this);
+        pm.registerEvents(new DeathEvent(this), this);
+        pm.registerEvents(new CraftItemEvent(this), this);
+        pm.registerEvents(new ItemSpawnEvent(this), this);
     }
 
     private void enableCommands() {
         getCommand("team").setExecutor(new TeamCMD(this));
         getCommand("host").setExecutor(new HostCMD(this));
+        getCommand("cup").setExecutor(new CupCMD(this));
     }
 
 }

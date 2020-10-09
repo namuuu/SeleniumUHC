@@ -21,7 +21,7 @@ public class DamageEvent implements Listener {
             return;
         }
 
-        if(!this.main.info.getState().equals(StateUHC.GAME)) {
+        if(!this.main.info.getState().equals(StateUHC.GAME) || this.main.timer.getTimer() < 30) {
             event.setCancelled(true);
         }
     }

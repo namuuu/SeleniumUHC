@@ -42,13 +42,14 @@ public class InteractEvent implements Listener {
                 break;
             case "§eMenu du Host":
                 event.setCancelled(true);
+                this.main.menu.hostMain.open(player);
                 break;
         }
     }
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
-        if(!this.main.info.getState().equals(StateUHC.LOBBY)) {
+        if(!this.main.info.getState().equals(StateUHC.GAME)) {
             event.setCancelled(true);
         }
     }
