@@ -35,6 +35,9 @@ public class WinManager {
         }
         ItemBuilder.spawnFireWork(this.main.info.getSpawnLoc());
 
+        Bukkit.broadcastMessage(InfoUHC.prefix + "§eL'équipe " + team.getTeamName() + " §eremportent cette partie d'§6UHC §Eavec un succès foudroyant ! Félicitations à eux !");
+
+
         this.main.info.setState(StateUHC.END);
         displayKills();
         this.main.score.updateBoard();

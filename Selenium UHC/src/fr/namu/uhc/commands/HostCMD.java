@@ -2,6 +2,7 @@ package fr.namu.uhc.commands;
 
 import fr.namu.uhc.InfoUHC;
 import fr.namu.uhc.MainUHC;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -61,6 +62,14 @@ public class HostCMD implements TabExecutor {
                 this.main.GameStuff.save(player);
                 this.main.LobbyStuff.give(player);
                 player.teleport(this.main.info.getSpawnLoc());
+                break;
+            case "heal":
+                for(Player players : Bukkit.getOnlinePlayers()) {
+                    players.setHealth(player.getMaxHealth());
+                    players.setFoodLevel(20);
+                    players.sendMessage("§aLe Final Heal a été effectuée !");
+
+                }
                 break;
         }
 

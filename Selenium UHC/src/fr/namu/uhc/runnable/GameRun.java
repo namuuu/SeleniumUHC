@@ -32,7 +32,7 @@ public class GameRun extends BukkitRunnable {
                 Bukkit.broadcastMessage(InfoUHC.prefix + "§eLa §6Bordure §ecommence à se rétrécir, dirigez-vous vers le centre de la Map !");
             }
             if (wb.getSize() > BorderUHC.SMALL_BORDER.getValue()) {
-                wb.setSize(wb.getSize() - 0.5D);
+                wb.setSize(wb.getSize() - 3D);
                 wb.setWarningDistance((int)(wb.getSize() / 7.0D));
             }
         }

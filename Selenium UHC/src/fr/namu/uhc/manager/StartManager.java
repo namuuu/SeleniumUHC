@@ -3,10 +3,7 @@ package fr.namu.uhc.manager;
 import fr.namu.uhc.InfoUHC;
 import fr.namu.uhc.MainUHC;
 import fr.namu.uhc.PlayerUHC;
-import fr.namu.uhc.enums.BorderUHC;
-import fr.namu.uhc.enums.State;
-import fr.namu.uhc.enums.StateUHC;
-import fr.namu.uhc.enums.TeamUHC;
+import fr.namu.uhc.enums.*;
 import fr.namu.uhc.runnable.GameRun;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -39,7 +36,16 @@ public class StartManager {
         GameRun startGame = new GameRun(this.main);
         startGame.runTaskTimer(this.main, 0L, 20L);
 
-
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for(Player player : Bukkit.getOnlinePlayers()) {
+                    player.setHealth(player.getMaxHealth());
+                    player.setFoodLevel(20);
+                    player.sendMessage("§aLe Final Heal a été effectuée !");
+                }
+            }
+        }.runTaskLater(this.main, TimerUHC.FINAL_HEAL.getValue() * 20);
     }
 
     private Boolean verifySettings() {

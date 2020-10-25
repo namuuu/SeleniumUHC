@@ -62,6 +62,8 @@ public class MainUHC extends JavaPlugin {
         pm.registerEvents(new DeathEvent(this), this);
         pm.registerEvents(new CraftItemEvent(this), this);
         pm.registerEvents(new ItemSpawnEvent(this), this);
+        pm.registerEvents(new ChatEvent(this), this);
+        pm.registerEvents(new CommandEvent(this), this);
     }
 
     private void enableCommands() {

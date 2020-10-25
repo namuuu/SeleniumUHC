@@ -18,6 +18,13 @@ public class ItemSpawnEvent implements Listener {
             ItemStack item = event.getEntity().getItemStack();
             Material mat = item.getType();
             switch (mat) {
+                case SNOW:
+                case SNOW_BALL:
+                    event.setCancelled(true);
+                    break;
+                case SAPLING:
+                    item.setType(Material.APPLE);
+                    break;
                 case COAL:
                     item.setType(Material.TORCH);
                     break;

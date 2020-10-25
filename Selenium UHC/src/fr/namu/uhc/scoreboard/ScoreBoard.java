@@ -29,11 +29,7 @@ public class ScoreBoard {
             if(this.main.info.getState().equals(StateUHC.LOBBY)) {
                 LobbyBoard(board);
             } else if (this.main.info.getState().equals(StateUHC.GAME)) {
-                if(switchBoard == 0) {
-                    GameBoard(board);
-                } else {
-                    ScoresBoard(board);
-                }
+                GameBoard(board);
             }
         }
     }

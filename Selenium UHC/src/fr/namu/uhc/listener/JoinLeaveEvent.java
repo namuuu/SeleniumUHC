@@ -51,6 +51,10 @@ public class JoinLeaveEvent implements Listener {
             this.main.info.setHost(null);
         }
 
+        if(player.getGameMode().equals(GameMode.SPECTATOR)) {
+            return;
+        }
+
         if(this.main.info.getState().equals(StateUHC.LOBBY) || this.main.info.getState().equals(StateUHC.END)) {
             if(puhc.getTeam() != null) {
                 this.main.team.leaveTeam(player);
